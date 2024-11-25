@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+    <title>NoduleNet - Detect</title>
+    <link rel="stylesheet" href="{% static 'css/detect.css' %}">
+{% endblock %}
+
+{% block underline3 %}
+    <div class="line"></div>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="detect"></div>
+    </div>
+{% endblock %}

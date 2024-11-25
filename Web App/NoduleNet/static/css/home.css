@@ -1,0 +1,56 @@
+.container {
+    height: calc(100vh - 70px);
+    background: linear-gradient(to bottom, #000e28, #08162d, #1b2439, #283948);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #bbb;
+    overflow-y: auto;
+    gap: 10px;
+    padding: 100px 50px 50px;
+}
+
+.container h1 {
+    font-size: 2.8em;
+}
+
+.container h3 {
+    font-size: 1.6em;
+}
+
+.container img {
+    margin: 0;
+}
+
+.container .logo {
+    height: 150px;
+}
+
+.container p {
+    font-size: 1.3em;
+    text-align: justify;
+    max-width: 800px;
+    line-height: 1.5;
+}
+
+.container .btn {
+    margin: 10px;
+    min-width: 80px;
+    min-height: 40px;
+    border: none;
+    border-radius: 5px;
+    background: #ccc;
+    color: #00153d;
+    font-size: 1.3em;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+.container .btn:hover {
+    color: #21313f;
+}

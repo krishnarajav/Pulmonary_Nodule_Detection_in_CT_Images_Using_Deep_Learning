@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+    <title>NoduleNet - About</title>
+    <link rel="stylesheet" href="{% static 'css/about.css' %}">
+{% endblock %}
+
+{% block underline2 %}
+    <div class="line"></div>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>About</h1>
+        <div class="content">
+            <div class="image">
+                <img alt="overview" class="output-img" src="{% static 'images/Model Overview.png' %}">
+            </div>
+            <div class="text-info">
+                <div>
+                    <h2>Introduction</h2>
+                    <p>This project was designed to assist healthcare professionals in identifying and analyzing pulmonary nodules in lung CT scans. Leveraging advanced deep learning techniques, we aim to enhance diagnostic accuracy and improve patient outcomes.
+                    </p>
+                </div>
+                <div>
+                    <h2>Technology Behind the Tool</h2>
+                    <p>Our tool uses a U-Net-based convolutional neural network, a state-of-the-art model for medical image segmentation. Integrated with image preprocessing techniques like CLAHE and lung masking, it ensures enhanced visualization and precise nodule detection.</p>
+                </div>
+                <div>
+                    <h2>Team and Development</h2>
+                    <p>Developed by a dedicated team of engineering students passionate about merging technology with healthcare, this project combines expertise in AI, image processing, and web development to deliver a user-friendly diagnostic solution with an impressive accuracy of 82.6%.</p>
+                </div>
+                <div>
+                    <h2>Acknowledgement and Collaborations</h2>
+                    <p>Special thanks to the LUNA16 dataset and the open-source AI community for providing the foundation for this project. We welcome collaborations to expand the capabilities and applications of our tool.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,148 @@
+* {
+    font-family: 'Gemunu Libre', Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    position: relative;
+}
+
+header {
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000e28;
+    border-bottom: solid 2px #fafafa56;
+    font-size: 1.2em;
+}
+
+.logo {
+    margin-left: 0px;
+    cursor: pointer;
+    pointer-events: none;
+}
+
+.img-logo {
+    height: 70px;
+}
+
+.navigation {
+    display: flex;
+    gap: 60px;
+    margin-left: 60px;
+}
+
+.navigation .nav a {
+    display: inline-block;
+    font-size: 1.1em;
+    color: #ccc;
+    text-decoration: none;
+    font-weight: 600;
+    transition: transform 0.5s ease;
+}
+
+.navigation .nav a:hover {
+    transform: scale(1.1);
+}
+
+.navigation .nav .line {
+    width: 100%;
+    margin-top: 2px;
+    height: 2px;
+    background: #888;
+}
+
+/*
+.corner {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background-color: blue;
+}
+
+Top-Left Corner
+.corner.tl::before, .corner.tl::after {
+    content: '';
+    position: absolute;
+    background-color: blue;
+}
+
+.corner.tl::before {
+    width: 5px;
+    height: 30px;
+    left: 0;
+    top: 0;
+}
+
+.corner.tl::after {
+    width: 30px;
+    height: 5px;
+    left: 0;
+    top: 0;
+}
+
+Top-Right Corner
+.corner.tr::before, .corner.tr::after {
+    content: '';
+    position: absolute;
+    background-color: blue;
+}
+
+.corner.tr::before {
+    width: 5px;
+    height: 30px;
+    right: 0;
+    top: 0;
+}
+
+.corner.tr::after {
+    width: 30px;
+    height: 5px;
+    right: 0;
+    top: 0;
+}
+
+Bottom-Left Corner
+.corner.bl::before, .corner.bl::after {
+    content: '';
+    position: absolute;
+    background-color: blue;
+}
+
+.corner.bl::before {
+    width: 5px;
+    height: 30px;
+    left: 0;
+    bottom: 0;
+}
+
+.corner.bl::after {
+    width: 30px;
+    height: 5px;
+    left: 0;
+    bottom: 0;
+}
+
+Bottom-Right Corner
+.corner.br::before, .corner.br::after {
+    content: '';
+    position: absolute;
+    background-color: blue;
+}
+
+.corner.br::before {
+    width: 5px;
+    height: 30px;
+    right: 0;
+    bottom: 0;
+}
+
+.corner.br::after {
+    width: 30px;
+    height: 5px;
+}*/
