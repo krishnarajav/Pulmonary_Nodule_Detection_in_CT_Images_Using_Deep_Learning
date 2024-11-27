@@ -4,13 +4,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: #bbb;
     overflow-y: auto;
     padding: 30px 50px 50px;
 }
 
 h1 {
     font-size: 2.5em;
+    color: #ddd;
 }
 
 .content {
@@ -19,6 +19,7 @@ h1 {
     flex-direction: row; 
     align-items: flex-start;
     gap: 25px;
+    color: #aaa;
 }
 
 .image img {
@@ -31,7 +32,7 @@ h1 {
     gap: 25px; 
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1500px) {
     .content {
         flex-direction: column; 
         align-items: center; 

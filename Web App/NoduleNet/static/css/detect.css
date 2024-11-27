@@ -1,11 +1,267 @@
 .container {
+    position: relative;
     height: calc(100vh - 70px);
     background: #000;
     display: flex;
+    align-items: center;
+    overflow-y: auto;
+}
+
+.content {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: calc(100% - 3px);
+    margin-top: 3px;
+}
+
+.display {
+    width: 75%;
+    background: #000000;
+    position: relative;
+}
+
+.corner-border {
+    position: absolute;
+    width: calc(100% - 3px);
+    height: calc(100% - 3px); 
+    border: 2px solid #15486f;
+    border-radius: 5px;
+}
+
+.corner {
+    position: absolute;
+    width: 50px; 
+    height: 50px; 
+}
+
+.corner.top-left {
+    top: 5px;
+    left: 5px;
+    border-left: 2px solid #036499;
+    border-top: 2px solid #036499;
+    border-radius: 5px;
+}
+
+.corner.top-right {
+    top: 5px;
+    right: 5px;
+    border-right: 2px solid #036499;
+    border-top: 2px solid #036499;
+    border-radius: 5px;
+}
+
+.corner.bottom-left {
+    bottom: 5px;
+    left: 5px;
+    border-left: 2px solid #036499;
+    border-bottom: 2px solid #036499;
+    border-radius: 5px;
+}
+
+.corner.bottom-right {
+    bottom: 5px;
+    right: 5px;
+    border-right: 2px solid #036499;
+    border-bottom: 2px solid #036499;
+    border-radius: 5px;
+}
+
+.perform {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.buttons-container {
+    position: absolute;
+    display: flex;
+    gap: 10px;
+    top: 20px;
+    left: 50px;
+}
+
+.upload-button {
+    position: relative;
+    padding: 0;
+    height: 35px;
+    cursor: pointer;
+}
+
+.upload {   
+    position: relative;
+    height: 35px;
+    width: auto;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.file-upload {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    font-size: 0em;
+    opacity: 0;   
+    z-index: 2;
+    cursor: pointer;
+}
+
+.run-button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.run {
+    display: block;
+    height: 35px;
+    width: auto;
+}
+
+.buttons-container img {
+    transition: transform 0.2s ease-in-out;
+}
+
+.buttons-container img:hover {
+    transform: scale(1.05);
+}
+
+.images {
+    margin: 100px 50px 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 100px;
+}
+
+.input-img {
+    display: flex;
     flex-direction: column;
     align-items: center;
-    color: #bbb;
-    overflow-y: auto;
-    gap: 10px;
-    padding: 100px 50px 50px;
+    justify-content: center;
+    border: 2px solid #036499;
 }
+
+.output-img {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #036499;
+}
+
+.images p {
+    font-size: 1.6em;
+    color: #aaa;
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 2px solid #036499;
+    padding: 5px;
+}
+
+.images img {
+    width: 100%;
+    height: auto;
+}
+
+@media (max-width: 1200px) {
+    .images img {
+        width: 80%;
+    }
+}
+
+@media (max-width: 800px) {
+    .images img {
+        width: 60%;
+    }
+}
+
+@media (max-width: 500px) {
+    .images img {
+        width: 40%;
+    }
+}
+
+.model-details p {
+    font-family: 'Oxanium', Geneva, Times;
+    color: #d8c812;
+    font-size: 0.7em; 
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+}
+
+.sidebar {
+    position: relative;
+    width: 25%;
+    height: 100%;
+    background: #000e28;
+    display: block;
+    justify-content: center;
+}
+
+.nodule-count {
+    height: 40px;
+    width: 100%;
+    background: #1A4E7B;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 5px 5px 0 0;
+}
+
+p.count-title {
+    color: #ccc;
+    font-size: 1.3em;
+}
+
+p.count-no {
+    color: #fc8b29;
+    font-size: 1.3em;
+}
+
+table {
+    width: calc(100% - 6px);
+    margin: 0 3px;
+    padding: 0;
+    border-collapse: separate;
+    border-spacing: 0 3px;
+    align-items: center;
+    justify-content: center;
+}
+
+.nodule-detail-head tr{
+    color: #aaa;
+    font-size: 1.2em;
+    height: 30px;
+    background: #152D5E;
+}
+
+th, td {
+    font-weight: 500;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.nodule-detail tr{
+    color: #bbb;
+    font-size: 1.3em;
+    height: 40px;
+    background: #081637;
+    cursor: pointer;
+}
+
+.nodule-detail tr:hover {
+    box-shadow: 0 0 0 1px #0d96c0;
+    background: linear-gradient(to bottom, #1A294E, #081637);
+}
+
+

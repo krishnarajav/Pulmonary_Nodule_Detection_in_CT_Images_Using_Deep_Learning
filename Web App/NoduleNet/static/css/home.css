@@ -4,7 +4,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: #bbb;
+    color: #ddd;
     overflow-y: auto;
     gap: 10px;
     padding: 100px 50px 50px;
@@ -12,6 +12,7 @@
 
 .container h1 {
     font-size: 2.8em;
+    
 }
 
 .container h3 {
@@ -39,7 +40,7 @@
     min-height: 40px;
     border: none;
     border-radius: 5px;
-    background: #ccc;
+    background: #ddd;
     color: #00153d;
     font-size: 1.3em;
     font-weight: 600;

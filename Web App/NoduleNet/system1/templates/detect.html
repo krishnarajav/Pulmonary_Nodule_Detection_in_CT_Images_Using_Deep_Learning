@@ -11,6 +11,103 @@
 
 {% block content %}
     <div class="container">
-        <div class="detect"></div>
+        <div class="content">
+            <div class="display">
+
+                <div class="corner-border">
+                    <div class="corner top-left"></div>
+                    <div class="corner top-right"></div>
+                    <div class="corner bottom-left"></div>
+                    <div class="corner bottom-right"></div>
+                </div>
+
+                <div class="perform">
+                    <div class="buttons-container">
+                        <div class="upload-button">
+                            <img class="upload" alt="upload" src="{% static 'images/Upload Button.png' %}">
+                            <input class="file-upload" type="file" id="file-input"/>   
+                        </div>
+                        <button class="run-button">
+                            <img class="run" alt="run" src="{% static 'images/Run Button.png' %}">
+                        </button>
+                    </div>
+
+                    <div class="images">
+                        <div class="input-img">
+                            <p>Input Image</p>
+                            <img class="detect-img" alt="detect-img" src="{% static 'images/Input.png' %}">
+
+                            <!--input image
+                            <img class="detect-img" alt="detect-img" src="{{ input_img }}">
+                            -->
+
+                        </div>
+                        <div class="output-img">
+                            <p>Output Image</p>
+                            <img class="detected-img" alt="detected-img" src="{% static 'images/Output.png' %}">
+
+                            <!--output image
+                            <img class="detected-img" alt="detected-img" src="{{ output_img }}">
+                            -->
+
+                        </div>
+                    </div>
+
+                    <div class="model-details">
+                        <p>Version: 1.0<br>Status: Ready<br>Accuracy: 82.6%<br>Last Updated: 21-11-2024</p>
+
+                        <!--model details
+                        <p>Version: {{ model_version }}<br>Status: {{ status }}<br>Accuracy: {{ model_accuracy }}<br>Last Updated: {{ updated_date }}</p>
+                        -->
+                    </div>
+                </div>
+
+            </div>
+            <div class="sidebar">
+                <div class="nodule-count">
+                    <p class="count-title">Lung Nodules &nbsp;</p>
+                    <p class="count-no">2</p>
+
+                    <!--for nodule count
+                    <p class="count-no">{{ nodule_count }}</p>
+                    -->
+
+                </div>
+
+                <table>
+                    <thead class="nodule-detail-head">
+                        <tr>
+                            <th>Number</th>
+                            <th>Diameter (mm)</th>
+                            <th>Location (px x px)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="nodule-detail">
+                        <tr>
+                            <td>1</td>
+                            <td>3.5</td>
+                            <td>101x153</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>3.5</td>
+                            <td>101x153</td>
+                        </tr>
+
+                        <!-- to display nodule details
+                        {% for nodule in nodule_details %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td> 
+                                <td>{{ nodule.diameter }}</td>
+                                <td>{{ nodule.location }}</td>
+                            </tr>
+                            {% endfor %}
+                        -->
+
+                    </tbody>
+                </table>
+                
+            </div>
+        </div>
     </div>
 {% endblock %}
