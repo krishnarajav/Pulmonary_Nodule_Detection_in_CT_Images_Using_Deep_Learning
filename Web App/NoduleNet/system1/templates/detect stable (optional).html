@@ -22,39 +22,31 @@
                 </div>
 
                 <div class="perform">
-                    <div class="buttons-container">
-                        <div class="upload-button">
-                            <img class="upload" alt="upload" src="{% static 'images/Upload Button.png' %}">
-                            <input class="file-upload" type="file" id="file-input"/>   
+                    <form id="image-upload-form" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="buttons-container">
+                            <div class="upload-button">
+                                <img class="upload" alt="upload" src="{% static 'images/Upload_Button.png' %}">
+                                <input class="file-upload" type="file" id="file-input" name="image" />
+                            </div>
+                            <button class="run-button">
+                                <img class="run" alt="run" src="{% static 'images/Run_Button.png' %}">
+                            </button>
                         </div>
-                        <button class="run-button">
-                            <img class="run" alt="run" src="{% static 'images/Run Button.png' %}">
-                        </button>
-                    </div>
-
+                    </form>
+                    
                     <div class="images">
-                        <div class="input-img">
-                            <p>Input Image</p>
-                            <img class="detect-img" alt="detect-img" src="{% static 'images/Input.png' %}">
-
-                            <!--input image
-                            <img class="detect-img" alt="detect-img" src="{{ input_img }}">
-                            -->
-
-                        </div>
-                        <div class="output-img">
-                            <p>Output Image</p>
-                            <img class="detected-img" alt="detected-img" src="{% static 'images/Output.png' %}">
-
-                            <!--output image
-                            <img class="detected-img" alt="detected-img" src="{{ output_img }}">
-                            -->
-
+                        <div class="img-display">
+                            {% if display_img %}
+                                <img class="show-img" alt="display-img" src="{{ display_img }}">
+                            {% else %}
+                                <img class="show-img" alt="img-not-available" src="{% static 'images/Image_Not_Available.png' %}">
+                            {% endif %}
                         </div>
                     </div>
 
                     <div class="model-details">
-                        <p>Version: 1.0<br>Status: Ready<br>Accuracy: 82.6%<br>Last Updated: 21-11-2024</p>
+                        <p>Version: 1.0<br>Status: Ready<br>Accuracy: 82.6%<br>Last Updated: 21-11-2024<br>Analysis: Pending</p>
 
                         <!--model details
                         <p>Version: {{ model_version }}<br>Status: {{ status }}<br>Accuracy: {{ model_accuracy }}<br>Last Updated: {{ updated_date }}</p>
@@ -68,7 +60,7 @@
                     <p class="count-title">Lung Nodules &nbsp;</p>
                     <p class="count-no">2</p>
 
-                    <!--for nodule count
+                    <!--nodule count
                     <p class="count-no">{{ nodule_count }}</p>
                     -->
 
@@ -110,4 +102,33 @@
             </div>
         </div>
     </div>
-{% endblock %}
+
+    <script>
+        function attachFileInputListener() {
+            const fileInput = document.getElementById('file-input');
+            if (!fileInput) return;
+
+            fileInput.addEventListener('change', function () {
+                const form = document.getElementById('image-upload-form');
+                const formData = new FormData(form);
+
+                fetch('', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}', // CSRF token for security
+                    },
+                })
+                    .then(response => response.text())
+                    .then(data => {
+                        document.body.innerHTML = data; // Replace the entire page with the new content
+                        attachFileInputListener(); // Reattach event listener to the updated DOM
+                    })
+                    .catch(error => console.error('Error:', error));
+            });
+        }
+
+        // Attach the listener when the page loads
+        attachFileInputListener();
+    </script>
+{% endblock %}  
