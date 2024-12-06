@@ -41,14 +41,13 @@
                                 <div class="img-boundary">
                                     {% if display_img %}
                                         <img id="zoomable-img" class="show-img" alt="display-img" src="{{ display_img }}?t={{ timestamp }}">
-                                        <canvas id="canvas" style="display:none;"></canvas> 
+                                        
                                     {% else %}
                                         <img class="show-img" alt="img-not-available" src="{% static 'images/Image_Not_Available.png' %}">
                                     {% endif %}
                                 </div>
                             </div>
                             
-                           
                             {% if display_img %}
                                 <div class="bottom-controls">
                                     <button id="pan-left-btn" class="pan-left">
@@ -77,28 +76,23 @@
                                     </button>
                                     <button id="download-btn" class="download-img">
                                         <img src="{% static 'images/Download.png' %}" alt="Download"/>
+                                    </button>
                                 </div>
                             {% endif %}
-                         
                         </div>
-                        
-                        {% if display_img %}
-                            <div class="side-controls">
-                                <div class="threshold-control">
-                                    <input type="range" id="threshold-slider" min="0" max="255" value="128" orient="vertical">
-                                    <img alt="threshold-icon" src="{% static 'images/Threshold.png' %}">
-                                </div>
-                            </div>
-                        {% endif %}
-                    
                     </div>
 
                     <div class="model-details">
-                        <p>Version: {{ version }}<br>Status: {{ status }}<br>Accuracy: {{ accuracy }}<br>Last Updated: {{ last_updated }} <br>Analysis: {{ analysis }}</p>
+                        <p>Version: {{ version }}<br>Status: {{ status }}<br>Accuracy: {{ accuracy }}<br>Last Updated: {{ last_updated }}</p>
                     </div>
-                </div>
 
+                    <div class="analysis-details">
+                        <p>Analysis: {{ analysis }} <br>Result: {{ result }}</p>
+                    </div>
+
+                </div>
             </div>
+            
             <div class="sidebar">
                 <div class="nodule-count">
                     <p class="count-title">Lung Nodules &nbsp;</p>
@@ -140,15 +134,20 @@
         </div>
     </div>
 
-    <script async src="https://docs.opencv.org/4.x/opencv.js" type="text/javascript"></script>
     <script>
 
+        let input_status = false;
         // Function to handle image upload
         function attachFileInputListener() {
             const fileInput = document.getElementById('file-input');
             if (!fileInput) return;
 
             fileInput.addEventListener('change', function () {
+                // If a file is selected, set input_status to true
+                if (fileInput.files.length > 0) {
+                    input_status = true;
+                }
+
                 const form = document.getElementById('image-upload-form');
                 const formData = new FormData(form);
 
@@ -164,7 +163,6 @@
                         document.body.innerHTML = data; // Replace the page with new content
                         initListeners(); // Reattach listeners after page reload
                         initImageControls(); // Reinitialize image controls functionality after image upload
-                        initThresholdSlider();
                     })
                     .catch(error => console.error('Error:', error));
             });
@@ -178,6 +176,12 @@
     
             btn.addEventListener('click', function (event) {
                 event.preventDefault(); // Prevent default form submission
+
+                // Check if the input status is false (i.e., no file has been selected)
+                if (!input_status) {
+                    alert("Please upload a file before proceeding!");
+                    return; // Prevent further execution if no file is uploaded
+                }
                 
                 fetch('/process', {
                     method: 'POST',
@@ -192,7 +196,6 @@
                         document.body.innerHTML = data; // Update the page with new content
                         initListeners(); // Reattach listeners after page reload
                         initImageControls(); // Reinitialize image controls functionality after image upload
-                        initThresholdSlider();
                     })
                     .catch(error => console.error('Error:', error));
             });
@@ -334,52 +337,6 @@
             });
         }
 
-
-        //Threshold effect
-        function initThresholdSlider() {
-        const imageElement = document.getElementById('zoomable-img'); // The image element
-        const thresholdSlider = document.getElementById('threshold-slider'); // The threshold slider
-
-        // Create a canvas element for OpenCV to work with
-        const canvas = document.getElementById('canvas');
-        const ctx = canvas.getContext('2d');
-        
-        // Function to apply binary thresholding with a dynamic threshold value
-        thresholdSlider.addEventListener('input', function() {
-            const thresholdValue = parseInt(thresholdSlider.value, 10); // Get the threshold value from the slider
-            
-            // Draw the image onto the canvas to work with it using OpenCV
-            ctx.drawImage(imageElement, 0, 0, canvas.width, canvas.height);
-            
-            // Read the image from the canvas
-            let img = cv.imread(canvas);
-            let gray = new cv.Mat();
-            let thresholded = new cv.Mat();
-
-            // Convert to grayscale
-            cv.cvtColor(img, gray, cv.COLOR_RGBA2GRAY);
-            
-            // Apply the thresholding
-            cv.threshold(gray, thresholded, thresholdValue, 255, cv.THRESH_BINARY);
-
-            // Write the thresholded image back to the canvas
-            cv.imshow(canvas, thresholded);
-
-            // Clean up memory
-            img.delete();
-            gray.delete();
-            thresholded.delete();
-        });
-
-        // Initial thresholding effect based on the default slider value (128)
-        thresholdSlider.dispatchEvent(new Event('input'));
-    }
-
-    // Initialize functionality once the page is loaded
-    window.onload = function () {
-        initImageControls();  // Call your other initialization functions like this
-        initThresholdSlider(); // Initialize the threshold slider functionality
-    };
-
+        window.onload = initImageControls();  
     </script>
 {% endblock %}  

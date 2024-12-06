@@ -21,6 +21,11 @@ class CustomConv2DTranspose(Conv2DTranspose):
 
 
 filename=None
+#model metadata
+model_version = "1.0"
+model_status = "Ready"
+model_accuracy = "82.68%"
+last_updated = "05-12-2024"
 
 def process(request):
 
@@ -88,7 +93,20 @@ def process(request):
     display_img=os.path.join(settings.MEDIA_URL, 'uploads', 'output.png')
 
     timestamp = datetime.now().timestamp()
-    return render(request, 'detect.html', {'display_img': display_img, 'timestamp':timestamp, 'nodule_details': nodule_details, 'nodule_count':len(nodule_details)})
+    model_analysis = "Completed"
+    context = {
+        'display_img': display_img, 
+        'timestamp': timestamp,
+        'version' : model_version,
+        'status' : model_status,
+        'accuracy' : model_accuracy,
+        'last_updated' : last_updated,
+        'analysis' : model_analysis, 
+        'nodule_details': nodule_details, 
+        'nodule_count':len(nodule_details)
+    }
+    
+    return render(request, 'detect.html', context)
 
 def home(request):
     return render(request, 'home.html')
@@ -117,5 +135,19 @@ def detect(request):
         display_img = os.path.join(settings.MEDIA_URL, 'uploads', "input.png")
 
     timestamp = datetime.now().timestamp()
-    return render(request, 'detect.html', {'display_img': display_img, 'timestamp':timestamp})
-
+    
+    if display_img is None:
+        model_analysis = "File Not Uploaded"
+    else:
+        model_analysis = "Pending"
+    
+    context = {
+        'display_img': display_img, 
+        'timestamp': timestamp,
+        'version' : model_version,
+        'status' : model_status,
+        'accuracy' : model_accuracy,
+        'last_updated' : last_updated,
+        'analysis' : model_analysis
+    }
+    return render(request, 'detect.html', context)

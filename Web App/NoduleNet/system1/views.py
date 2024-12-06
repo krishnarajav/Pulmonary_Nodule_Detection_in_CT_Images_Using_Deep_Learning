@@ -24,8 +24,8 @@ filename=None
 #model metadata
 model_version = "1.0"
 model_status = "Ready"
-model_accuracy = "82.6%"
-last_updated = "21-11-2024"
+model_accuracy = "88.68%"
+last_updated = "03-12-2024"
 
 def process(request):
 
@@ -35,6 +35,7 @@ def process(request):
     
     get_custom_objects().update({'CustomConv2DTranspose': CustomConv2DTranspose})
     path = 'UNet_model_compatible.h5'
+    #path = 'checkpoint-084-0.851.hdf5'
 
     try:
         model = load_model(path)
@@ -44,6 +45,29 @@ def process(request):
 
     image_path=os.path.join(settings.MEDIA_ROOT, 'uploads', 'input.png')
     img = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
+    
+    
+    
+    #handle false uploads
+    timestamp = datetime.now().timestamp()
+    display_img=os.path.join(settings.MEDIA_URL, 'uploads', 'input.png')
+
+    context = {
+        'display_img': display_img, 
+        'timestamp': timestamp,
+        'version' : model_version,
+        'status' : model_status,
+        'accuracy' : model_accuracy,
+        'last_updated' : last_updated,
+        'analysis' : "File Error",
+        'result' : "File Error"
+    }
+
+    if img is None or img.shape != (512, 512):
+        return render(request, 'detect.html', context)
+
+
+    
     temp=img # Stored to display at the end as output.
     testX=img = img.astype(np.float32)
 
@@ -94,6 +118,11 @@ def process(request):
 
     timestamp = datetime.now().timestamp()
     model_analysis = "Completed"
+    if len(nodule_details) == 0:
+        result = "Not Detetcted"
+    else:
+        result = "Detected"
+    
     context = {
         'display_img': display_img, 
         'timestamp': timestamp,
@@ -103,17 +132,21 @@ def process(request):
         'last_updated' : last_updated,
         'analysis' : model_analysis, 
         'nodule_details': nodule_details, 
-        'nodule_count':len(nodule_details)
+        'nodule_count':len(nodule_details),
+        'result' : result
     }
     
     return render(request, 'detect.html', context)
 
+#home
 def home(request):
     return render(request, 'home.html')
 
+#about
 def about(request):
     return render(request, 'about.html')
 
+#detect
 def detect(request):
     display_img = None
 
@@ -135,9 +168,10 @@ def detect(request):
         display_img = os.path.join(settings.MEDIA_URL, 'uploads', "input.png")
 
     timestamp = datetime.now().timestamp()
+    result = "Awaiting"
     
     if display_img is None:
-        model_analysis = "File Not Uploaded"
+        model_analysis = "Awaiting Input"
     else:
         model_analysis = "Pending"
     
@@ -148,6 +182,7 @@ def detect(request):
         'status' : model_status,
         'accuracy' : model_accuracy,
         'last_updated' : last_updated,
-        'analysis' : model_analysis
+        'analysis' : model_analysis,
+        'result' : result
     }
     return render(request, 'detect.html', context)

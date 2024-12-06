@@ -204,41 +204,6 @@
         width: 35px;
         filter: invert(1);
     }
-
-    .side-controls {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-left: 5px;
-        width: 50px;
-        height: 480px;
-        border: 2px solid #036499;  
-    }
-
-    .threshold-control {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        width: 50px;
-        height: 100%;
-    }
-
-    .threshold-control input[type="range"] {
-        width: 300px;
-        transform: rotate(-90deg); 
-        transform-origin: center; 
-        cursor: pointer;
-        margin-top: 160px;
-    }
-
-    .threshold-control img {
-        margin-top: 160px;
-        height: 35px;
-        width: 35px;
-        filter: invert(1);
-        border: 1px solid #ababab;
-    }
     
     @media (max-height: 720px) {
         .img-boundary {
@@ -260,22 +225,6 @@
         }
 
         .bottom-controls button img {
-            height: 30px;
-            width: 30px;
-        }
-
-        .side-controls {
-            max-height: 432px;
-            width: 50px;
-            margin-top: 23px;
-        }
-
-        .threshold-control input[type="range"] {
-            width: 250px;
-        }
-    
-        .threshold-control img {
-            margin-top: 150px;
             height: 30px;
             width: 30px;
         }
@@ -304,18 +253,6 @@
             height: 26px;
             width: 26px;
         }
-
-        .side-controls {
-            height: 384px;
-            width: 40px;
-            margin-top: 45px;
-        }
-
-        .threshold-control img {
-            margin-top: 150px;
-            height: 26px;
-            width: 26px;
-        }
     }
 
     @media (max-height: 680px) {
@@ -338,22 +275,6 @@
         }
 
         .bottom-controls button img {
-            height: 24px;
-            width: 24px;
-        }
-
-        .side-controls {
-            height: 336px;
-            width: 40px;
-            margin-top: 70px;
-        }
-
-        .threshold-control input[type="range"] {
-            width: 200px;
-        }
-
-        .threshold-control img {
-            margin-top: 100px;
             height: 24px;
             width: 24px;
         }
@@ -382,22 +303,6 @@
             height: 24px;
             width: 24px;
         }
-
-        .side-controls {
-            height: 336px;
-            width: 40px;
-            margin-top: 70px;
-        }
-
-        .threshold-control input[type="range"] {
-            width: 200px;
-        }
-
-        .threshold-control img {
-            margin-top: 100px;
-            height: 24px;
-            width: 24px;
-        }
     }
 
     .model-details p {
@@ -407,6 +312,16 @@
         position: absolute;
         bottom: 20px;
         left: 20px;
+    }
+
+    .analysis-details p {
+        font-family: 'Oxanium', Geneva, Times;
+        color: #d8c812;
+        font-size: 0.7em; 
+        position: absolute;
+        bottom: 20px;
+        right: 15px;
+        width: 130px;
     }
 
     .sidebar {
